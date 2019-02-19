@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ContactsDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ContactsTable">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NumbersTable" Relationship="ContactsDatabaseModel.FK_Table_1_Table_2" FromRole="ContactsTable" ToRole="NumbersTable" />
+    <NavigationProperty Name="EmailsTable" Relationship="ContactsDatabaseModel.FK_Table_3_Table_4" FromRole="ContactsTable" ToRole="EmailsTable" />
+  </EntityType>
+  <EntityContainer Name="ContactsDatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ContactsTable" EntityType="Self.ContactsTable" />
+    <EntitySet Name="EmailsTable" EntityType="ContactsDatabaseModel.EmailsTable" />
+    <EntitySet Name="NumbersTable" EntityType="ContactsDatabaseModel.NumbersTable" />
+    <AssociationSet Name="FK_Table_1_Table_2" Association="ContactsDatabaseModel.FK_Table_1_Table_2">
+      <End Role="ContactsTable" EntitySet="ContactsTable" />
+      <End Role="NumbersTable" EntitySet="NumbersTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_3_Table_4" Association="ContactsDatabaseModel.FK_Table_3_Table_4">
+      <End Role="ContactsTable" EntitySet="ContactsTable" />
+      <End Role="EmailsTable" EntitySet="EmailsTable" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="EmailsTable">
+    <Key>
+      <PropertyRef Name="IdEmail" />
+    </Key>
+    <Property Name="IdEmail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactId" Type="Guid" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ContactsTable" Relationship="ContactsDatabaseModel.FK_Table_3_Table_4" FromRole="EmailsTable" ToRole="ContactsTable" />
+  </EntityType>
+  <EntityType Name="NumbersTable">
+    <Key>
+      <PropertyRef Name="IdNumber" />
+    </Key>
+    <Property Name="IdNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactId" Type="Guid" Nullable="false" />
+    <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ContactsTable" Relationship="ContactsDatabaseModel.FK_Table_1_Table_2" FromRole="NumbersTable" ToRole="ContactsTable" />
+  </EntityType>
+  <Association Name="FK_Table_1_Table_2">
+    <End Type="ContactsDatabaseModel.ContactsTable" Role="ContactsTable" Multiplicity="1" />
+    <End Type="ContactsDatabaseModel.NumbersTable" Role="NumbersTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactsTable">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="NumbersTable">
+        <PropertyRef Name="ContactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_3_Table_4">
+    <End Type="ContactsDatabaseModel.ContactsTable" Role="ContactsTable" Multiplicity="1" />
+    <End Type="ContactsDatabaseModel.EmailsTable" Role="EmailsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactsTable">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="EmailsTable">
+        <PropertyRef Name="ContactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

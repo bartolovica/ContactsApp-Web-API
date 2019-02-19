@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ContactsDatabaseModelStoreContainer" CdmEntityContainer="ContactsDatabaseEntities">
+    <EntitySetMapping Name="ContactsTable">
+      <EntityTypeMapping TypeName="ContactsDatabaseModel.ContactsTable">
+        <MappingFragment StoreEntitySet="ContactsTable">
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailsTable">
+      <EntityTypeMapping TypeName="ContactsDatabaseModel.EmailsTable">
+        <MappingFragment StoreEntitySet="EmailsTable">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+          <ScalarProperty Name="IdEmail" ColumnName="IdEmail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NumbersTable">
+      <EntityTypeMapping TypeName="ContactsDatabaseModel.NumbersTable">
+        <MappingFragment StoreEntitySet="NumbersTable">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+          <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
